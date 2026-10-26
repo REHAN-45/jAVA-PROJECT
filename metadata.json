@@ -1,0 +1,6 @@
+{
+  "name": "Team Task Management - College Mini Project",
+  "description": "Complete beginner-friendly full-stack prototype with React Kanban board, team management, CSV export, and complete Java Spring Boot + PostgreSQL educational guide.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
