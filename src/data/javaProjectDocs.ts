@@ -1881,3 +1881,109 @@ export const VIVA_QUESTIONS = [
     answer: '1) Spring Security with JWT authentication and role-based permissions (allowing only Team Leads to delete tasks). 2) Real-time WebSockets (STOMP) so moving a Kanban card instantly moves it on team members screens. 3) Drag-and-drop file attachments saved to an S3 bucket or local volume.'
   }
 ];
+
+export const VS_CODE_SETUP_GUIDE = `
+========================================================================================
+           COMPLETE VISUAL STUDIO CODE (VS CODE) SETUP & RUN GUIDE
+========================================================================================
+
+Follow these exact steps to clone, configure, and run this project inside VS Code!
+
+----------------------------------------------------------------------------------------
+STEP 1: INSTALL REQUIRED SOFTWARE ON YOUR COMPUTER
+----------------------------------------------------------------------------------------
+1. Visual Studio Code: https://code.visualstudio.com/
+2. Java Development Kit (JDK 17 or higher):
+   - Download Eclipse Temurin 17 (LTS): https://adoptium.net/
+   - Verify in terminal: java -version
+3. Apache Maven:
+   - Verify in terminal: mvn -version
+4. Node.js (v18 or v20 LTS): https://nodejs.org/
+   - Verify in terminal: node -v && npm -v
+5. PostgreSQL (v14 or newer):
+   - Download: https://www.postgresql.org/download/
+   - Remember the postgres password you set during installation!
+
+----------------------------------------------------------------------------------------
+STEP 2: INSTALL ESSENTIAL VS CODE EXTENSIONS
+----------------------------------------------------------------------------------------
+Open VS Code, press Ctrl+Shift+X (or Cmd+Shift+X on Mac), and search & install:
+1. "Extension Pack for Java" (by Microsoft) - ID: vscjava.vscode-java-pack
+2. "Spring Boot Extension Pack" (by VMware) - ID: vmware.vscode-spring-boot
+3. "PostgreSQL" (by Chris Kolkman) - ID: ckolkman.vscode-postgres
+4. "Tailwind CSS IntelliSense" (by Tailwind Labs) - ID: bradlc.vscode-tailwindcss
+5. "Prettier - Code formatter" (by Prettier) - ID: esbenp.prettier-vscode
+
+(Notice: We have already added these to .vscode/extensions.json! VS Code will prompt:
+"Do you want to install the recommended extensions for this repository? Click Install All.")
+
+----------------------------------------------------------------------------------------
+STEP 3: CLONE OR OPEN THE PROJECT IN VS CODE
+----------------------------------------------------------------------------------------
+1. Open VS Code.
+2. Press Ctrl+Shift+P (Cmd+Shift+P on Mac) and type:
+   Git: Clone
+3. Paste your GitHub repository URL:
+   https://github.com/your-username/team-task-management.git
+4. Select a local folder (e.g. C:\\Projects\\ or ~/Projects/) and click "Open Repository".
+
+----------------------------------------------------------------------------------------
+STEP 4: SET UP POSTGRESQL DATABASE
+----------------------------------------------------------------------------------------
+1. In VS Code, open a new Terminal (Ctrl+\` or Terminal -> New Terminal).
+2. Connect to PostgreSQL:
+   psql -U postgres
+   (Enter your postgres password when prompted)
+3. Create the database:
+   CREATE DATABASE team_task_db;
+4. Connect to it:
+   \\c team_task_db
+5. Open the backend/src/main/resources/schema.sql file in VS Code, copy all the SQL,
+   and paste it into the psql terminal to create tables and seed records!
+6. Type \\dt to verify the tables (members, tasks, activity_logs).
+7. Exit psql: \\q
+
+----------------------------------------------------------------------------------------
+STEP 5: CONFIGURE SPRING BOOT BACKEND
+----------------------------------------------------------------------------------------
+1. Open: backend/src/main/resources/application.properties
+2. Check the database credentials:
+   spring.datasource.url=jdbc:postgresql://localhost:5432/team_task_db
+   spring.datasource.username=postgres
+   spring.datasource.password=YOUR_POSTGRES_PASSWORD_HERE
+
+----------------------------------------------------------------------------------------
+STEP 6: RUNNING THE APPLICATION IN VS CODE
+----------------------------------------------------------------------------------------
+Option A: Using 1-Click Run & Debug (F5)
+1. Press Ctrl+Shift+D (Run and Debug view).
+2. At the top dropdown, select "Spring Boot - Launch TeamTaskManagementApplication".
+3. Press F5 or click the Green Play button!
+4. VS Code starts the Spring Boot server on port 8080.
+5. In another terminal tab, run:
+   npm install
+   npm run dev
+6. Open your browser at http://localhost:3000!
+
+Option B: Using Split Terminals (Beginner Friendly)
+Terminal 1 (Backend):
+   cd backend
+   mvn spring-boot:run
+
+Terminal 2 (Frontend):
+   npm install
+   npm run dev
+
+----------------------------------------------------------------------------------------
+TROUBLESHOOTING COMMON VS CODE ISSUES
+----------------------------------------------------------------------------------------
+* "Port 8080 already in use":
+  - Windows: netstat -ano | findstr :8080 (then taskkill /PID <PID> /F)
+  - Mac/Linux: lsof -i :8080 (then kill -9 <PID>)
+* "Java Language Server: Cannot resolve Java runtime":
+  - Press Ctrl+Shift+P -> "Java: Configure Java Runtime" and point it to JDK 17.
+* "CORS Error in Browser":
+  - Make sure backend is running on http://localhost:8080 and TaskController has
+    @CrossOrigin(origins = "*").
+`;
+

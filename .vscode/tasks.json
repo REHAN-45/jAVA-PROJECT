@@ -1,0 +1,35 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "backend: run spring boot (mvn)",
+      "type": "shell",
+      "command": "mvn spring-boot:run",
+      "options": {
+        "cwd": "${workspaceFolder}/backend"
+      },
+      "group": "build",
+      "problemMatcher": ["$maven"]
+    },
+    {
+      "label": "frontend: run vite dev server",
+      "type": "shell",
+      "command": "npm run dev",
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "isBackground": true,
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      }
+    },
+    {
+      "label": "database: create postgres database (psql)",
+      "type": "shell",
+      "command": "psql -U postgres -c \"CREATE DATABASE team_task_db;\"",
+      "problemMatcher": []
+    }
+  ]
+}

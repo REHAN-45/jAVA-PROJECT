@@ -28,6 +28,7 @@ import {
   GIT_GITHUB_WORKFLOW, 
   POSTMAN_TESTS, 
   VIVA_QUESTIONS,
+  VS_CODE_SETUP_GUIDE,
   JavaCodeFile 
 } from '../data/javaProjectDocs';
 import { triggerFileDownload } from '../utils/fileExport';
@@ -54,7 +55,8 @@ export const DocumentationView: React.FC = () => {
     { id: 'setup', label: '8. Step-by-Step Run Guide', icon: Terminal },
     { id: 'git', label: '9. Git & GitHub + README', icon: GitBranch },
     { id: 'testing', label: '10. Postman & cURL Tests', icon: ExternalLink },
-    { id: 'viva', label: '11. Viva Voce & Future Ideas', icon: HelpCircle }
+    { id: 'viva', label: '11. Viva Voce & Future Ideas', icon: HelpCircle },
+    { id: 'vscode', label: '12. VS Code Setup & Debug', icon: Code, highlight: true }
   ];
 
   return (
@@ -597,6 +599,32 @@ export const DocumentationView: React.FC = () => {
         </div>
       )}
 
+      {/* 12. VS Code Setup Guide */}
+      {activeSection === 'vscode' && (
+        <div className="space-y-4">
+          <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div>
+              <h2 className="text-base font-bold text-slate-900">Visual Studio Code (VS Code) Complete Setup Guide</h2>
+              <p className="text-xs text-slate-500">
+                Exact instructions to clone from GitHub, install extensions, and run with 1-click debugging in VS Code.
+              </p>
+            </div>
+            <button
+              onClick={() => handleCopy(VS_CODE_SETUP_GUIDE, 'vscode-guide')}
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold text-white bg-indigo-600 hover:bg-indigo-700 rounded-lg shadow-xs"
+            >
+              {copiedKey === 'vscode-guide' ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
+              <span>Copy VS Code Guide</span>
+            </button>
+          </div>
+
+          <div className="bg-slate-900 text-slate-200 font-mono text-xs p-5 rounded-2xl overflow-x-auto border border-slate-800 shadow-inner">
+            <pre className="leading-relaxed">{VS_CODE_SETUP_GUIDE}</pre>
+          </div>
+        </div>
+      )}
+
     </div>
   );
 };
+
